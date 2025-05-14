@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video For ADK</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: url('Axolatol pic.jpg') center center / cover no-repeat fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      font-family: sans-serif;
+    }
+
+    select, button {
+      background: black;
+      border: 2px solid #ff69b4;
+      color: #ff69b4;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+    }
+
+    select:hover, button:hover {
+      background: #ff69b4;
+      color: black;
+    }
+
+    .neon-frame {
+      width: 70vw;
+      height: 39.375vw;
+      max-height: 60vh;
+      box-shadow: 0 0 15px #ff69b4, 0 0 25px #ff69b4, 0 0 40px #ff69b4;
+      border: 2px solid #ff69b4;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: black;
+      margin-bottom: 20px;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #adminPanel {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      background-color: rgba(0,0,0,0.8);
+      color: #ff69b4;
+    }
+
+    #adminToggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <button id="adminToggle">🔒 Unlock Skibidy Powers</button>
+
+  <div class="neon-frame" id="videoContainer">
+    <video id="videoPlayer" controls autoplay loop>
+      <source src="https://pixeldrain.com/api/file/LLjvs6s" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <select id="videoSelector">
+    <option value="https://pixeldrain.com/u/Qcru3QPC">Video 1</option>
+    <option value="https://pixeldrain.com/u/za4mUUbt">Video 2</option>
+    <option value="https://pixeldrain.com/u/pz8ayp4H">Video 3</option>
+    <option value="https://pixeldrain.com/u/tWK1Egn3">Video 4</option>
+  </select>
+
+  <button onclick="syncVideo()">🔁 Sync Video</button>
+
+  <div id="adminPanel">
+    <h2>Admin Panel</h2>
+    <button onclick="resetVideo()">🌀 Reset All Videos</button>
+    <button onclick="kickEveryone()">🚫 Kick Everyone</button>
+  </div>
+
+  <script>
+    const video = document.getElementById('videoPlayer');
+    const source = video.querySelector('source');
+    const selector = document.getElementById('videoSelector');
+    const adminToggle = document.getElementById('adminToggle');
+    const adminPanel = document.getElementById('adminPanel');
+    const videoContainer = document.getElementById('videoContainer');
+
+    selector.addEventListener('change', () => {
+      source.src = selector.value;
+      video.load();
+      video.play();
+    });
+
+    function syncVideo() {
+      video.currentTime = 0;
+      video.play();
+    }
+
+    function resetVideo() {
+      video.currentTime = 0;
+      video.load();
+    }
+
+    function kickEveryone() {
+      document.body.innerHTML = "<h1 style='color: pink; text-align: center; margin-top: 20%; font-size: 48px;'>Womp Womp!,You Got Kicked</h1>";
+      setTimeout(() => {
+        window.location.href = "https://google.com";
+      }, 2500);
+    }
+
+    adminToggle.addEventListener('click', () => {
+      const pass = prompt("Enter The Code ADK Member (Thats not the code BTW):");
+      if (pass === 'ADK999') {
+        adminPanel.style.display = 'flex';
+        videoContainer.style.display = 'none';
+        adminToggle.style.display = 'none';
+      } else {
+        alert("Your Stupid.");
+      }
+    });
+  </script>
+</body>
+</html>
